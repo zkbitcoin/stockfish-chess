@@ -1,5 +1,5 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
-import { useHistory } from 'react-router';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   game: {
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const ActiveGame = ({ gameId }: { gameId: number }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <Box display="flex" justifyContent="space-between" className={classes.game}>
@@ -18,7 +18,7 @@ export const ActiveGame = ({ gameId }: { gameId: number }) => {
         size="small"
         variant="contained"
         color="primary"
-        onClick={() => history.push(`/game/${gameId}`)}
+        onClick={() => navigate(`/game/${gameId}`)}
       >
         Join
       </Button>

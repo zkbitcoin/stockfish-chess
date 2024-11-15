@@ -10,7 +10,7 @@ import {
   makeStyles,
   TextField,
 } from '@material-ui/core';
-import { useHistory } from 'react-router';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { Face, Fingerprint } from '@material-ui/icons';
 import { Alert } from '@material-ui/lab';
 import { login } from 'utils/auth';
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const LoginDialog = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -44,22 +44,22 @@ export const LoginDialog = () => {
       const data = await login(email, password);
 
       if (data) {
-        history.push('/');
+          navigate('/');
       }
-    } catch (err) {
+    } catch (err : unknown) {
       if (err instanceof Error) {
         // handle errors thrown from frontend
         setError(err.message);
       } else {
         // handle errors thrown from backend
-        setError(err);
+        setError(String(err));
       }
     }
   };
 
   const handleClose = async () => {
     setOpen(false);
-    history.push('/');
+      navigate('/');
   };
 
   return (
@@ -137,7 +137,7 @@ export const LoginDialog = () => {
               variant="outlined"
               color="primary"
               className={classes.button}
-              onClick={() => history.push('/signup')}
+              onClick={() => navigate('/signup')}
             >
               Sign Up
             </Button>{' '}

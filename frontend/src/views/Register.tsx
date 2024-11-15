@@ -11,8 +11,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Face, Fingerprint } from '@material-ui/icons';
 import { Alert } from '@material-ui/lab';
-import { Redirect } from 'react-router-dom';
-import { useHistory } from 'react-router';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 import { signUp, isAuthenticated } from 'utils/auth';
 
@@ -33,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Register = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>('');
@@ -49,15 +48,15 @@ export const Register = () => {
         const data = await signUp(email, password, passwordConfirmation);
 
         if (data) {
-          history.push('/');
+            navigate('/');
         }
-      } catch (err) {
+      } catch (err: unknown) {
         if (err instanceof Error) {
           // handle errors thrown from frontend
           setError(err.message);
         } else {
           // handle errors thrown from backend
-          setError(err);
+          setError(String(err));
         }
       }
     }
@@ -65,11 +64,11 @@ export const Register = () => {
 
   const handleClose = () => {
     setOpen(false);
-    history.push('/');
+      navigate('/');
   };
 
   return isAuthenticated() ? (
-    <Redirect to="/" />
+    <Navigate to="/" />
   ) : (
     <Dialog
       className={classes.padding}

@@ -1,4 +1,4 @@
-import decodeJwt from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 import { AUTH_URL } from 'utils/config';
 
@@ -49,7 +49,7 @@ export const login = async (email: string, password: string) => {
   }
 
   if ('access_token' in data) {
-    const decodedToken: any = decodeJwt(data['access_token']);
+    const decodedToken: any = jwtDecode(data['access_token']);
     localStorage.setItem('token', data['access_token']);
     localStorage.setItem('permissions', decodedToken.permissions);
   }
@@ -106,7 +106,7 @@ export const signUp = async (
   }
 
   if ('access_token' in data) {
-    const decodedToken: any = decodeJwt(data['access_token']);
+    const decodedToken: any = jwtDecode(data['access_token']);
     localStorage.setItem('token', data['access_token']);
     localStorage.setItem('permissions', decodedToken.permissions);
   }

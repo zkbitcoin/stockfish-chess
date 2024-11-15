@@ -7,7 +7,7 @@ import {
   DialogContent,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const useStyles = makeStyles({
   dialog: {
@@ -29,11 +29,11 @@ type DialogProps = {
 export const JoinGameDialog: FC<DialogProps> = ({ open, onClose }) => {
   const classes = useStyles();
   const [gameId, setGameId] = useState<string>('');
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
     // check if gameId exists
-    history.push(`/?game=${gameId}`);
+    navigate(`/?game=${gameId}`);
     onClose();
   };
 

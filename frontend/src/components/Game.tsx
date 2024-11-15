@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Chessboard from 'chessboardjsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
-import { ChessInstance } from 'chess.js';
+import { Chess } from 'chess.js'
 import axios from 'axios';
 
 import { GameTypes, Turn, Move } from 'types';
@@ -10,7 +10,8 @@ import { JoinGameDialog } from 'components';
 import { BACKEND_URL } from '../utils/config';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import { GameType } from './types';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const ChessReq: any = require('chess.js');
 
@@ -32,10 +33,10 @@ type GamePropsType = {
 
 export const Game = ({ socket }: GamePropsType) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id: gameId } = useParams<{ id: string }>();
 
-  const [game, setGame] = useState<ChessInstance>(new ChessReq());
+  const [game, setGame] = useState<Chess>(new ChessReq());
   const [turn, setTurn] = useState<Turn>(Turn.W);
   const [fen, setFen] = useState('start');
   const [gameType, setGameType] = useState<GameTypes | null>(null);
@@ -53,7 +54,7 @@ export const Game = ({ socket }: GamePropsType) => {
   };
 
   useEffect(() => {
-    if (game.game_over()) return;
+    if (game.isGameOver()) return;
 
     if (gameType === GameTypes.STOCKFISH_ENGINE && turn === Turn.B) {
       // fetch next move from backend
@@ -97,7 +98,7 @@ export const Game = ({ socket }: GamePropsType) => {
       );
     }
 
-    history.push(`/game/${newGameId}`);
+    navigate(`/game/${newGameId}`);
   };
 
   return (

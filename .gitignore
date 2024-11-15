@@ -49,3 +49,4 @@ tmp_email/
 build
 yarn.lock
 package-lock.json
+.idea

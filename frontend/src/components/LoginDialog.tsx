@@ -112,7 +112,7 @@ export const LoginDialog = () => {
               </Grid>
             )}
           </Grid>
-          <Grid container alignItems="center" justify="space-between">
+          <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
               <FormControlLabel
                 control={<Checkbox color="primary" />}
@@ -131,7 +131,7 @@ export const LoginDialog = () => {
               </Button>
             </Grid>
           </Grid>
-          <Grid container justify="center" className={classes.marginTop}>
+          <Grid container justifyContent="center" className={classes.marginTop}>
             {' '}
             <Button
               variant="outlined"

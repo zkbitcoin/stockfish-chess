@@ -14,7 +14,7 @@ export const Layout = (props: LayoutType) => {
     <Grid container>
       <Navigation></Navigation>
       <Grid item xs={12}>
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           <Grid item>{main}</Grid>
           <Grid item>{panel}</Grid>
         </Grid>

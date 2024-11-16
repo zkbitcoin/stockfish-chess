@@ -36,7 +36,7 @@ export const Game = ({ socket }: GamePropsType) => {
   const navigate = useNavigate();
   const { id: gameId } = useParams<{ id: string }>();
 
-  const [game, setGame] = useState<Chess>(new ChessReq());
+  const [game, setGame] = useState<Chess>(new Chess());
   const [turn, setTurn] = useState<Turn>(Turn.W);
   const [fen, setFen] = useState('start');
   const [gameType, setGameType] = useState<GameTypes | null>(null);
@@ -79,7 +79,7 @@ export const Game = ({ socket }: GamePropsType) => {
   };
 
   const resetGame = () => {
-    const newGame = new ChessReq();
+    const newGame = new Chess();
     setFen(newGame.fen());
     setGame(newGame);
   };

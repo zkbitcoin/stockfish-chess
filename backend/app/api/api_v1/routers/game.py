@@ -21,3 +21,7 @@ async def game(board: str):
     engine.quit()
 
     return b.fen()
+
+@r.get("/test")
+async def test():
+    return "ok"

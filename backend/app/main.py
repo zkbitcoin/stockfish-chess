@@ -103,4 +103,4 @@ app.include_router(auth_router, prefix="/api", tags=["auth"])
 app.include_router(game_router, prefix="/api/v1", tags=["game"])
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", reload=True, port=8888)
+    uvicorn.run("main:app", host="::", reload=True, port=8888)

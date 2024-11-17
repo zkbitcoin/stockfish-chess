@@ -5,6 +5,9 @@ import { GameType } from 'components/types';
 import { Layout } from './Layout';
 import { GameLobby, Game } from 'components';
 
+import { Outlet } from 'react-router-dom';
+
+
 export const Main = () => {
   const [socket, setSocket] = useState<ReconnectingWebSocket | null>(null);
   const [activeGames, setActiveGames] = useState<GameType[]>([]);
@@ -48,10 +51,13 @@ export const Main = () => {
     }
   };
 
-  return (
-    <Layout
-      main={<Game socket={socket} />}
-      panel={<GameLobby websocket={socket} games={activeGames} />}
-    />
-  );
+    return (
+        <Layout
+            main={<Game socket={socket} />}
+            panel={<GameLobby websocket={socket} games={activeGames} />}
+        >
+            {/* Render nested routes using Outlet */}
+            <Outlet />
+        </Layout>
+    );
 };

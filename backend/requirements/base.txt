@@ -1,8 +1,8 @@
 alembic==1.4.3
 Authlib==0.14.3
 fastapi==0.63.0
-celery==5.0.0
-redis==3.5.3
+celery==5.0.5
+redis==4.6.0
 httpx==0.15.5
 itsdangerous==1.1.0
 Jinja2==2.11.3
@@ -17,5 +17,4 @@ sqlalchemy-utils==0.36.8
 python-multipart==0.0.5
 pyjwt==1.7.1
 chess==1.4.0
-redis==3.5.3
 broadcaster[redis]

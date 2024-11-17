@@ -33,12 +33,14 @@ services:
     command: celery --app app.tasks worker --loglevel=DEBUG -Q main-queue -c 1
 
   flower:
-    image: mher/flower
-    command: flower --broker=redis://redis:6379/0 --port=5555
+    image: mher/flower  # Flower monitoring tool for Celery
     ports:
-      - 5555:5555
+      - "5555:5555"  # Expose Flower's web UI on port 5555
     depends_on:
-      - "redis"
+      - redis  # Wait for Redis to start before Flower
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - FLOWER_PORT=5555
 
   backend:
     build:

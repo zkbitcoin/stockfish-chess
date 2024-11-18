@@ -21,18 +21,21 @@ const httpClient = (url: any, options: any) => {
 const dataProvider = simpleRestProvider(BACKEND_URL, httpClient);
 
 export const Admin: FC = () => {
-  return (
-    <ReactAdmin dataProvider={dataProvider} authProvider={authProvider}>
-      {(permissions: 'admin' | 'user') => [
-        permissions === 'admin' ? (
-          <Resource
-            name="users"
-            list={UserList}
-            edit={UserEdit}
-            create={UserCreate}
-          />
-        ) : null,
-      ]}
-    </ReactAdmin>
-  );
+    return (
+        <ReactAdmin dataProvider={dataProvider} authProvider={authProvider}>
+            {(permissions: 'admin' | 'user' | undefined) => {
+                // Log the permissions to the console
+                console.log('Current permissions:', permissions);
+
+                return permissions === 'admin' ? (
+                    <Resource
+                        name="users"
+                        list={UserList}
+                        edit={UserEdit}
+                        create={UserCreate}
+                    />
+                ) : null;
+            }}
+        </ReactAdmin>
+    );
 };

@@ -44,8 +44,7 @@ export const Navigation = () => {
       <Toolbar>
         <Typography variant='h4' className={classes.title}>
           Stockfish Chess
-        </Typography>
-        <Box
+        {/* <Box
           display='flex'
           className={classes.actions}
           justifyContent='flex-end'
@@ -72,7 +71,8 @@ export const Navigation = () => {
                 </Button>
               </>
               )}
-        </Box>
+        </Box> */}
+        </Typography>
       </Toolbar>
     </AppBar>
   )

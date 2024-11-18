@@ -1,12 +1,14 @@
+version: "3.7"
 services:
   nginx:
     image: nginx:1.17
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - "${NGINX_PORT}:80"
+      - 8000:80
     depends_on:
       - backend
+      - frontend
 
   redis:
     image: redis
@@ -49,14 +51,25 @@ services:
     volumes:
       - ./backend:/app/:cached
       - ./.docker/.ipython:/root/.ipython:cached
-    env_file:
-      - .env  # This will automatically load variables from the .env file
     environment:
       PYTHONPATH: .
       DATABASE_URL: "postgresql://postgres:password@postgres:5432/postgres"
       REDIS_URL: "redis://redis:6379"
+      CORS_ORIGINS: "http://localhost,http://localhost:4000"
+      PORT: 8888
     depends_on:
       - "postgres"
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    command: /frontend/app/run.sh start
+    stdin_open: true
+    volumes:
+      - "./frontend:/app:cached"
+    environment:
+      - NODE_ENV=development
 
 volumes:
   db-data:

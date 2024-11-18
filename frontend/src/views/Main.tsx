@@ -54,7 +54,7 @@ export const Main = () => {
     return (
         <Layout
             main={<Game socket={socket} />}
-            panel={<GameLobby websocket={socket} games={activeGames} />}
+            // panel={<GameLobby websocket={socket} games={activeGames} />}
         >
             {/* Render nested routes using Outlet */}
             <Outlet />

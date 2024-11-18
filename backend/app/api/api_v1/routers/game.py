@@ -22,6 +22,3 @@ async def game(board: str):
 
     return b.fen()
 
-@r.get("/test")
-async def test():
-    return "ok"

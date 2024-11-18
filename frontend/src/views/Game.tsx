@@ -41,7 +41,7 @@ export const Game = () => {
   return (
     <Layout
       main={<BoardGame socket={socket} />}
-      panel={<ChatRoom socket={socket} color={Colors.WHITE} />}
+      //panel={<ChatRoom socket={socket} color={Colors.WHITE} />}
     />
   );
 };

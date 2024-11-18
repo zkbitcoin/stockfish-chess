@@ -10,6 +10,7 @@ from app.api.api_v1.routers.users import users_router
 from app.api.api_v1.routers.auth import auth_router
 from app.api.api_v1.routers.websocket import ws_router
 from app.api.api_v1.routers.game import game_router
+from app.api.api_v1.routers.health import health_router
 from app.core import config
 from app.db.schemas import WebSocketResponse, MessageTypeEnum
 from app.db.session import SessionLocal
@@ -18,8 +19,10 @@ from app.core.celery_app import celery_app
 from app import tasks
 
 # Load environment variables
-CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost,http://localhost:3000").split(",")
-PORT = int(os.getenv("PORT", 8888))
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost,http://localhost:4000").split(",")
+BACKEND_PORT = int(os.getenv("PORT", 8888))
+SSL_KEY_PATH = os.getenv("SSL_KEY_PATH")
+SSL_CRT_PATH = os.getenv("SSL_CRT_PATH")
 
 #origins = [
 #    "http://localhost",
@@ -105,6 +108,19 @@ app.include_router(
 )
 app.include_router(auth_router, prefix="/api", tags=["auth"])
 app.include_router(game_router, prefix="/api/v1", tags=["game"])
+app.include_router(health_router, prefix="/api/v1", tags=["health"])
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="::", reload=True, port=PORT)
+    # If SSL certificates are provided, run with SSL
+    if SSL_KEY_PATH and SSL_CRT_PATH:
+        uvicorn.run(
+            "main:app",
+            host="::",  # allows listening on all IPs
+            reload=True,
+            port=PORT,
+            ssl_keyfile=SSL_KEY_PATH,
+            ssl_certfile=SSL_CRT_PATH
+        )
+    else:
+        # Run without SSL (dev environment)
+        uvicorn.run("main:app", host="::", reload=True, port=BACKEND_PORT)

@@ -1,4 +1,4 @@
-import { LoginDialog } from 'components/LoginDialog';
-import React from 'react';
+import { LoginDialog } from '../components/LoginDialog'
+import React from 'react'
 
-export const Login = () => <LoginDialog />;
+export const Login = () => <LoginDialog />

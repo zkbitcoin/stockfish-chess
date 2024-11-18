@@ -5,8 +5,8 @@ import { Button } from '@material-ui/core';
 import { Chess } from 'chess.js'
 import axios from 'axios';
 
-import { GameTypes, Turn, Move } from 'types';
-import { JoinGameDialog } from 'components';
+import { GameTypes, Turn, Move } from '../types';
+import { JoinGameDialog } from '../components';
 import { BACKEND_URL } from '../utils/config';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import { GameType } from './types';

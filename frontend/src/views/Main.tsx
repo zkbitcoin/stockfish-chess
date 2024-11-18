@@ -3,7 +3,7 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 
 import { GameType } from 'components/types';
 import { Layout } from './Layout';
-import { GameLobby, Game } from 'components';
+import { GameLobby, Game } from '../components';
 
 import { Outlet } from 'react-router-dom';
 

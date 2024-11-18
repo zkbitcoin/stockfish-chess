@@ -1,7 +1,7 @@
-import { Admin } from 'admin'
+import { Admin } from './admin'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { Login, Game, Main } from 'views'
-import { Register } from 'views/Register'
+import { Login, Game, Main } from './views'
+import { Register } from './views/Register'
 import { useParams } from 'react-router'
 
 export const AppRoutes = () => {

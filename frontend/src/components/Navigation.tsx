@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core'
 import { useNavigate } from 'react-router-dom';
 
-import { isAuthenticated, logout } from 'utils/auth'
+import { isAuthenticated, logout } from '../utils/auth'
 
 const useStyles = makeStyles({
   appBar: {

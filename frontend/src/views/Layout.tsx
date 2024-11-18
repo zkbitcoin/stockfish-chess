@@ -1,5 +1,5 @@
 import { Grid } from '@material-ui/core';
-import { Game, Navigation } from 'components';
+import { Game, Navigation } from '../components';
 
 type LayoutType = {
     main: React.ReactElement;

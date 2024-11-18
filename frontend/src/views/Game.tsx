@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
-import { GameType } from 'components/types';
+import { GameType } from '../components/types';
 import { Layout } from './Layout';
-import { ChatRoom, Game as BoardGame } from 'components';
-import { Colors } from 'types';
+import { ChatRoom, Game as BoardGame } from '../components';
+import { Colors } from '../types';
 import { useParams } from 'react-router';
 
 export const Game = () => {

@@ -1,4 +1,4 @@
-import { AUTH_URL } from 'utils/config';
+import { AUTH_URL } from '../utils/config';
 import { jwtDecode } from "jwt-decode";
 
 type loginFormType = {

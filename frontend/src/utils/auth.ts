@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 
-import { AUTH_URL } from 'utils/config';
+import { AUTH_URL } from '../utils/config';
 
 export const isAuthenticated = () => {
   const permissions = localStorage.getItem('permissions');

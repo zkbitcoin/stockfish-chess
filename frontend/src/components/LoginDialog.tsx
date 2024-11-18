@@ -13,7 +13,7 @@ import {
 import { useNavigate, Navigate } from 'react-router-dom';
 import { Face, Fingerprint } from '@material-ui/icons';
 import { Alert } from '@material-ui/lab';
-import { login } from 'utils/auth';
+import { login } from '../utils/auth';
 
 const useStyles = makeStyles((theme) => ({
   margin: {

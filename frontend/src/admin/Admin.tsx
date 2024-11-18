@@ -4,7 +4,7 @@ import simpleRestProvider from 'ra-data-simple-rest';
 import authProvider from './authProvider';
 
 import { UserList, UserEdit, UserCreate } from './Users';
-import { BACKEND_URL } from 'utils/config';
+import { BACKEND_URL } from '../utils/config';
 
 const httpClient = (url: any, options: any) => {
   if (!options) {

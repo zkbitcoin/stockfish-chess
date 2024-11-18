@@ -17,7 +17,7 @@ export const Game = () => {
 
   const connect = () => {
     setSocket(
-      new ReconnectingWebSocket(`ws://localhost:8000/api/ws/game/${gameId}`)
+      new ReconnectingWebSocket(`${process.env.WS_URL}/api/ws/game/${gameId}`)
     );
 
     if (socket) {

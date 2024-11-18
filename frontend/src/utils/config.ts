@@ -1,2 +1,2 @@
-export const BACKEND_URL = 'http://localhost:8000/api/v1'
-export const AUTH_URL = 'http://localhost:8000/api'
+export const BACKEND_URL = `${process.env.SERVER_URL}/api/v1`
+export const AUTH_URL = `${process.env.SERVER_URL}/api`

@@ -17,10 +17,14 @@ from app.core.auth import get_current_active_user
 from app.core.celery_app import celery_app
 from app import tasks
 
-origins = [
-    "http://localhost",
-    "http://localhost:3000",
-]
+# Load environment variables
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost,http://localhost:3000").split(",")
+PORT = int(os.getenv("PORT", 8888))
+
+#origins = [
+#    "http://localhost",
+#    "http://localhost:3000",
+#]
 
 broadcast = Broadcast(os.getenv("REDIS_URL"))
 
@@ -76,7 +80,7 @@ async def chatroom_ws(websocket: WebSocket):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     expose_headers=["Content-Range"],
     allow_methods=["*"],
@@ -103,4 +107,4 @@ app.include_router(auth_router, prefix="/api", tags=["auth"])
 app.include_router(game_router, prefix="/api/v1", tags=["game"])
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="::", reload=True, port=8888)
+    uvicorn.run("main:app", host="::", reload=True, port=PORT)

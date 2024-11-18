@@ -128,6 +128,9 @@ const config: webpack.Configuration = {
         }),
         new HtmlWebpackPlugin({
             template: "public/index.html",
+            templateParameters: {
+                PUBLIC_URL: paths.publicUrlOrPath,
+            },
         }),
         new HotModuleReplacementPlugin(),
         new ForkTsCheckerWebpackPlugin({

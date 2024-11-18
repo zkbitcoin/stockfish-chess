@@ -20,7 +20,7 @@ export const Main = () => {
 
   const connect = () => {
     const socket = new ReconnectingWebSocket(
-      'ws://localhost:8000/api/ws/lobby'
+        `${process.env.WS_URL}/api/ws/lobby`
     );
 
     setSocket(socket);

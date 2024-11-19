@@ -11,7 +11,7 @@ services:
   redis:
     image: redis
     ports:
-      - 6379:6379
+      - 6380:6380
 
   postgres:
     image: postgres:12
@@ -37,7 +37,7 @@ services:
     depends_on:
       - redis  # Wait for Redis to start before Flower
     environment:
-      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6380/0
       - FLOWER_PORT=5555
 
   backend:
@@ -54,7 +54,7 @@ services:
     environment:
       PYTHONPATH: .
       DATABASE_URL: "postgresql://postgres:password@postgres:5432/postgres"
-      REDIS_URL: "redis://redis:6379"
+      REDIS_URL: "redis://redis:6380"
     depends_on:
       - "postgres"
 

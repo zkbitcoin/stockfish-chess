@@ -117,7 +117,7 @@ if __name__ == "__main__":
             "main:app",
             host="::",  # allows listening on all IPs
             reload=True,
-            port=PORT,
+            port=BACKEND_PORT,
             ssl_keyfile=SSL_KEY_PATH,
             ssl_certfile=SSL_CRT_PATH
         )

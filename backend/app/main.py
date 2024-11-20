@@ -17,10 +17,12 @@ from app.db.session import SessionLocal
 from app.core.auth import get_current_active_user
 from app.core.celery_app import celery_app
 from app import tasks
+from dotenv import load_dotenv
 
-# Load environment variables
+load_dotenv()
+
 CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost,http://localhost:4000").split(",")
-BACKEND_PORT = int(os.getenv("PORT", 8888))
+BACKEND_PORT = int(os.getenv("BACKEND_PORT", 8888))
 SSL_KEY_PATH = os.getenv("SSL_KEY_PATH")
 SSL_CRT_PATH = os.getenv("SSL_CRT_PATH")
 
@@ -111,7 +113,9 @@ app.include_router(game_router, prefix="/api/v1", tags=["game"])
 app.include_router(health_router, prefix="/api/v1", tags=["health"])
 
 if __name__ == "__main__":
-    # If SSL certificates are provided, run with SSL
+    print(f"SSL Key Path: {SSL_KEY_PATH}")
+    print(f"SSL Certificate Path: {SSL_CRT_PATH}")
+    print(f"Port: {BACKEND_PORT}")
     if SSL_KEY_PATH and SSL_CRT_PATH:
         uvicorn.run(
             "main:app",
@@ -122,5 +126,4 @@ if __name__ == "__main__":
             ssl_certfile=SSL_CRT_PATH
         )
     else:
-        # Run without SSL (dev environment)
         uvicorn.run("main:app", host="::", reload=True, port=BACKEND_PORT)

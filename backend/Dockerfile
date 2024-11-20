@@ -13,3 +13,11 @@ RUN pip install -r base_requirements.txt
 RUN pip install -r dev_requirements.txt
 
 COPY . .
+
+
+# Copy SSL certificates into the container
+COPY cert/blockbook.key /app/cert/blockbook.key
+COPY cert/blockbook.crt /app/cert/blockbook.crt
+
+# Optional: Set the correct file permissions if necessary
+RUN chmod 644 /app/cert/blockbook.key /app/cert/blockbook.crt

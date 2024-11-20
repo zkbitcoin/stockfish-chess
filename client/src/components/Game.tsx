@@ -25,6 +25,9 @@ const useStyles = makeStyles({
     marginLeft: '10px',
     marginRight: '10px',
   },
+  buttons: {
+      alignItems: 'center'
+  },
 });
 
 type GamePropsType = {
@@ -62,21 +65,32 @@ export const Game = ({ socket }: GamePropsType) => {
     }
   }, [turn, game, gameType]);
 
-  const onDrop = ({ sourceSquare, targetSquare }: Move) => {
-    if (turn !== Turn.W) return;
+    const onDrop = ({ sourceSquare, targetSquare }: Move) => {
+        if (turn !== Turn.W) return;
 
-    const move = game.move({
-      from: sourceSquare,
-      to: targetSquare,
-      promotion: 'q', // always promote to queen
-    });
+        // Check if the move is valid first
+        const move = game.moves({
+            square: sourceSquare,
+            verbose: true
+        }).find(m => m.to === targetSquare);
 
-    if (move === null) return;
+        // If no valid move is found, return
+        if (!move) return;
 
-    setTurn(Turn.B);
+        // If it's a pawn that reaches the promotion rank, add promotion
+        const promotion = (move.piece === 'p' && (targetSquare[1] === '8' || targetSquare[1] === '1')) ? 'q' : undefined;
 
-    setFen(game.fen());
-  };
+        const executedMove = game.move({
+            from: sourceSquare,
+            to: targetSquare,
+            promotion: promotion, // only promote when necessary
+        });
+
+        if (executedMove === null) return;
+
+        setTurn(Turn.B);
+        setFen(game.fen());
+    };
 
   const resetGame = () => {
     const newGame = new Chess();
@@ -112,30 +126,32 @@ export const Game = ({ socket }: GamePropsType) => {
         />
       </div>
       <div>
-        <Button
-          className={classes.button}
-          variant="contained"
-          onClick={() => setGameType(GameTypes.STOCKFISH_ENGINE)}
-        >
-          Play a Computer
-        </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          onClick={newGameAgainstPerson}
-        >
-          New Game
-        </Button>
-        {/*
-        <Button
-          className={classes.button}
-          variant="contained"
-          onClick={() => setModalOpen(true)}
-        >
-          Join Game
-        </Button>
-        <JoinGameDialog open={modalOpen} onClose={() => setModalOpen(false)} />
-        */}
+        <div className={classes.buttons}>
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={() => setGameType(GameTypes.STOCKFISH_ENGINE)}
+            >
+              Play a Computer
+            </Button>
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={newGameAgainstPerson}
+            >
+              New Game
+            </Button>
+            {/*
+            <Button
+              className={classes.button}
+              variant="contained"
+              onClick={() => setModalOpen(true)}
+            >
+              Join Game
+            </Button>
+            <JoinGameDialog open={modalOpen} onClose={() => setModalOpen(false)} />
+            */}
+        </div>
       </div>
     </div>
   );

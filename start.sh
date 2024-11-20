@@ -22,4 +22,5 @@ export REDIS_URL="redis://0.0.0.0:6379"
 
 source server/.venv/bin/activate
 
-python server/app/main.py > /dev/null 2>&1
+#python server/app/main.py > /dev/null 2>&1
+python server/app/main.py 

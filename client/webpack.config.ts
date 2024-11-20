@@ -16,13 +16,15 @@ const paths = require('paths');
 const nodeEnv = process.env['NODE_ENV'] || "development";
 const isProduction = nodeEnv === "production";
 
+const basePath = '/games/stockfish-chess/client';
+
 const config: webpack.Configuration = {
     stats: { children: true },
     mode: isProduction ? "production" : "development",
     entry: "./src/index.tsx",
     output: {
         filename: isProduction ? "static/js/bundle.js" : "bundle.js",
-        publicPath: isProduction ? "auto" : "",
+        publicPath: isProduction ? "auto" : basePath,
         path: path.resolve(__dirname, "build/"),
         //globalObject: 'typeof self !== "object" ? self : this'
         assetModuleFilename: 'static/assets/[name].[contenthash][ext]',
@@ -149,7 +151,7 @@ const config: webpack.Configuration = {
         }),
     ],
     devServer: {
-        "headers": [
+        headers: [
             { "key": "Cross-Origin-Embedder-Policy", "value": "require-corp" },
             { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" }
         ],
@@ -161,12 +163,17 @@ const config: webpack.Configuration = {
         },
         static: {
             directory: path.join(__dirname, "public"),
+            publicPath: '/games/stockfish-chess/client',
         },
-        historyApiFallback: true,
+        historyApiFallback: {
+            index: '/games/stockfish-chess/client/index.html', // Ensure correct handling of routes
+        },
         port: 4000,
         open: true,
         hot: !isProduction,
+        compress: true,
     }
+
 };
 
 export default config;

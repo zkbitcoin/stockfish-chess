@@ -23,7 +23,8 @@ const useStyles = makeStyles({
   },
   title: {
     color: 'grey',
-    flexGrow: 3
+    flexGrow: 3,
+    textAlign: 'center'
   },
   actions: {
     width: '240px'
@@ -42,7 +43,7 @@ export const Navigation = () => {
   return (
     <AppBar className={classes.appBar} position='static'>
       <Toolbar>
-        <Typography variant='h4' className={classes.title}>
+        <Typography variant='h5' className={classes.title}>
           Stockfish Chess
         {/* <Box
           display='flex'

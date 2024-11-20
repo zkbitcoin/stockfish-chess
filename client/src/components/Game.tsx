@@ -126,6 +126,7 @@ export const Game = ({ socket }: GamePropsType) => {
         >
           New Game
         </Button>
+        {/*
         <Button
           className={classes.button}
           variant="contained"
@@ -134,6 +135,7 @@ export const Game = ({ socket }: GamePropsType) => {
           Join Game
         </Button>
         <JoinGameDialog open={modalOpen} onClose={() => setModalOpen(false)} />
+        */}
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost,http://localhost:4000").split(",")
-BACKEND_PORT = int(os.getenv("BACKEND_PORT", 8888))
+SERVER_PORT = int(os.getenv("SERVER_PORT", 8890))
 SSL_KEY_PATH = os.getenv("SSL_KEY_PATH")
 SSL_CRT_PATH = os.getenv("SSL_CRT_PATH")
 
@@ -115,15 +115,15 @@ app.include_router(health_router, prefix="/api/v1", tags=["health"])
 if __name__ == "__main__":
     print(f"SSL Key Path: {SSL_KEY_PATH}")
     print(f"SSL Certificate Path: {SSL_CRT_PATH}")
-    print(f"Port: {BACKEND_PORT}")
+    print(f"Port: {SERVER_PORT}")
     if SSL_KEY_PATH and SSL_CRT_PATH:
         uvicorn.run(
             "main:app",
             host="::",  # allows listening on all IPs
             reload=True,
-            port=BACKEND_PORT,
+            port=SERVER_PORT,
             ssl_keyfile=SSL_KEY_PATH,
             ssl_certfile=SSL_CRT_PATH
         )
     else:
-        uvicorn.run("main:app", host="::", reload=True, port=BACKEND_PORT)
+        uvicorn.run("main:app", host="::", reload=True, port=SERVER_PORT)

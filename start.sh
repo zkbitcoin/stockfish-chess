@@ -16,10 +16,10 @@
 #docker-compose -f "$CONFIG_FILE" up -d
 
 
-export PYTHONPATH=./backend
+export PYTHONPATH=./server
 export DATABASE_URL="postgresql://postgres:password@postgres:5432/postgres"
 export REDIS_URL="redis://0.0.0.0:6379"
 
-source backend/.venv/bin/activate
+source server/.venv/bin/activate
 
-python backend/app/main.py > /dev/null 2>&1
+python server/app/main.py > /dev/null 2>&1

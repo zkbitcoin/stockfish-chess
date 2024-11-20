@@ -24,6 +24,8 @@ export const AppRoutes = () => {
         <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />
       </Route>
+      {/* Catch-all for unhandled routes */}
+      <Route path='*' element={<h1>404 - Page Not Found</h1>} />
     </Routes>
   )
 }

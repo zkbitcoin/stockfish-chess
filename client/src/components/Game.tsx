@@ -26,8 +26,7 @@ const useStyles = makeStyles({
     marginRight: '10px',
   },
   buttons: {
-      justifyContent: 'center',
-      alignItems: 'center'
+      textAlign: 'center',
   },
 });
 
